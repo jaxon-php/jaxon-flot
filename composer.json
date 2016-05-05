@@ -1,0 +1,26 @@
+{
+    "name": "lagdo/xajax-flot",
+    "type": "library",
+    "description": "Javascript charts for Xajax with Flot",
+    "authors": [
+        {"name": "Thierry Feuzeu"}
+    ],
+    "homepage": "https://github.com/lagdo/xajax-flot",
+    "license": "BSD-2-Clause",
+    "keywords": ["Xajax", "Ajax", "PHP", "Javascript", "Charts", "Plot", "Flot"],
+    "support": {
+        "issues": "https://github.com/lagdo/xajax-flot/issues",
+        "source": "https://github.com/lagdo/xajax-flot"
+    },
+    "require": {
+        "lagdo/xajax-core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xajax\\Flot\\": "src/"
+        },
+        "files": [
+            "src/start.php"
+        ]
+    }
+}
