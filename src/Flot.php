@@ -17,7 +17,7 @@ class Flot extends \Xajax\Plugin\Response
 
 	public function getJsInclude()
  	{
-		if(!$this->getOption('assets.include.all') && !$this->getOption('assets.include.flot'))
+		if(!$this->includeAssets())
 		{
 			return '';
 		}
