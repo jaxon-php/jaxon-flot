@@ -1,17 +1,17 @@
 <?php
 
-namespace Xajax\Flot\Charts;
+namespace Jaxon\Flot\Charts;
 
 class Graph
 {
     /**
      * Add a dataset to the chart
      * 
-     * @param \Xajax\Flot\Plot\Serie        $series        The dataset to be added
+     * @param \Jaxon\Flot\Plot\Serie        $series        The dataset to be added
      * 
      * @return void
      */
-    public function addSeries(\Xajax\Flot\Plot\Series $series)
+    public function addSeries(\Jaxon\Flot\Plot\Series $series)
     {
         
     }

@@ -1,5 +1,5 @@
-# Flot for Xajax
+# Flot for Jaxon
 
-Javascript charts for Xajax with Flot
+Javascript charts for Jaxon with Flot
 
 *** Warning: this plugin is not yet rady for use ***

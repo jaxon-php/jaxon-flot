@@ -1,23 +1,23 @@
 {
-    "name": "lagdo/xajax-flot",
+    "name": "lagdo/jaxon-flot",
     "type": "library",
-    "description": "Javascript charts for Xajax with Flot",
+    "description": "Javascript charts for Jaxon with Flot",
     "authors": [
         {"name": "Thierry Feuzeu"}
     ],
-    "homepage": "https://github.com/lagdo/xajax-flot",
+    "homepage": "https://github.com/lagdo/jaxon-flot",
     "license": "BSD-2-Clause",
-    "keywords": ["Xajax", "Ajax", "PHP", "Javascript", "Charts", "Plot", "Flot"],
+    "keywords": ["Jaxon", "Xajax", "Ajax", "PHP", "Javascript", "Charts", "Plot", "Flot"],
     "support": {
-        "issues": "https://github.com/lagdo/xajax-flot/issues",
-        "source": "https://github.com/lagdo/xajax-flot"
+        "issues": "https://github.com/lagdo/jaxon-flot/issues",
+        "source": "https://github.com/lagdo/jaxon-flot"
     },
     "require": {
-        "lagdo/xajax-core": "dev-master"
+        "lagdo/jaxon-core": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Xajax\\Flot\\": "src/"
+            "Jaxon\\Flot\\": "src/"
         },
         "files": [
             "src/start.php"

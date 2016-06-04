@@ -1,8 +1,8 @@
 <?php
 
-namespace Xajax\Flot;
+namespace Jaxon\Flot;
 
-class Flot extends \Xajax\Plugin\Response
+class Flot extends \Jaxon\Plugin\Response
 {
     public function getName()
     {
@@ -31,7 +31,7 @@ class Flot extends \Xajax\Plugin\Response
     /*public function getClientScript()
     {
         return '
-xajax.command.handler.register("graph", function(args) {
+jaxon.command.handler.register("graph", function(args) {
     var options = {
         series: {
             lines: {show: true},

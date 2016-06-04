@@ -1,6 +1,6 @@
 <?php
 
-namespace Xajax\Flot\Plot;
+namespace Jaxon\Flot\Plot;
 
 class Bar extends Series
 {
