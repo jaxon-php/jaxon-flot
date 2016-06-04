@@ -11,7 +11,7 @@ class Pie
      * 
      * @return void
      */
-    public function setSeries(\Xajax\Flot\Series\Serie $series)
+    public function setSeries(\Xajax\Flot\Plot\Serie $series)
     {
         
     }

@@ -11,7 +11,7 @@ class Graph
      * 
      * @return void
      */
-    public function addSeries(\Xajax\Flot\Series\Series $series)
+    public function addSeries(\Xajax\Flot\Plot\Series $series)
     {
         
     }
