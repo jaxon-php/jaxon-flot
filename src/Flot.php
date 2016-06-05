@@ -31,7 +31,7 @@ class Flot extends \Jaxon\Plugin\Response
     /*public function getClientScript()
     {
         return '
-xajax.command.handler.register("graph", function(args) {
+jaxon.command.handler.register("graph", function(args) {
     var options = {
         series: {
             lines: {show: true},
