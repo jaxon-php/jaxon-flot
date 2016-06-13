@@ -1,5 +1,5 @@
 {
-    "name": "lagdo/jaxon-flot",
+    "name": "jaxon-php/jaxon-flot",
     "type": "library",
     "description": "Javascript charts for Jaxon with Flot",
     "authors": [
@@ -13,7 +13,7 @@
         "source": "https://github.com/jaxon-php/jaxon-flot"
     },
     "require": {
-        "lagdo/jaxon-core": "dev-master"
+        "jaxon-php/jaxon-core": "dev-master"
     },
     "autoload": {
         "psr-4": {

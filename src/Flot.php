@@ -22,10 +22,10 @@ class Flot extends \Jaxon\Plugin\Response
             return '';
         }
          return  '
-<script type="text/javascript" src="//assets.lagdo-software.net/libs/flot/0.8.3/jquery.flot.js"></script>
-<script type="text/javascript" src="//assets.lagdo-software.net/libs/flot/0.8.3/jquery.flot.tooltip.js"></script>
-<script type="text/javascript" src="//assets.lagdo-software.net/libs/flot/0.8.3/jquery.flot.resize.js"></script>
-<script type="text/javascript" src="//assets.lagdo-software.net/libs/flot/0.8.3/jquery.flot.tickrotor.js"></script>';
+<script type="text/javascript" src="//packages.jaxon-php.org/libs/flot/0.8.3/jquery.flot.js"></script>
+<script type="text/javascript" src="//packages.jaxon-php.org/libs/flot/0.8.3/jquery.flot.tooltip.js"></script>
+<script type="text/javascript" src="//packages.jaxon-php.org/libs/flot/0.8.3/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="//packages.jaxon-php.org/libs/flot/0.8.3/jquery.flot.tickrotor.js"></script>';
      }
 
     /*public function getClientScript()
