@@ -16,17 +16,17 @@ class Plugin extends \Jaxon\Plugin\Response
     }
 
     public function getJs()
-     {
+    {
         if(!$this->includeAssets())
         {
             return '';
         }
-         return  '
+        return  '
 <script type="text/javascript" src="//lib.jaxon-php.org/flot/0.8.3/jquery.flot.js"></script>
 <script type="text/javascript" src="//lib.jaxon-php.org/flot/0.8.3/jquery.flot.tooltip.js"></script>
 <script type="text/javascript" src="//lib.jaxon-php.org/flot/0.8.3/jquery.flot.resize.js"></script>
 <script type="text/javascript" src="//lib.jaxon-php.org/flot/0.8.3/jquery.flot.tickrotor.js"></script>';
-     }
+    }
 
     /*public function getClientScript()
     {
