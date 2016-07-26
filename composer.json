@@ -7,7 +7,7 @@
     ],
     "homepage": "https://github.com/jaxon-php/jaxon-flot",
     "license": "BSD-2-Clause",
-    "keywords": ["Jaxon", "Xajax", "Ajax", "PHP", "Javascript", "Charts", "Plot", "Flot"],
+    "keywords": ["Jaxon", "Xajax", "Ajax", "PHP", "Javascript", "Graph", "Chart", "Plot", "Flot"],
     "support": {
         "issues": "https://github.com/jaxon-php/jaxon-flot/issues",
         "source": "https://github.com/jaxon-php/jaxon-flot"
