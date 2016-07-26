@@ -28,34 +28,10 @@ class Plugin extends \Jaxon\Plugin\Response
 <script type="text/javascript" src="//lib.jaxon-php.org/flot/0.8.3/jquery.flot.tickrotor.js"></script>';
     }
 
-    /*public function getClientScript()
+    public function getScript()
     {
-        return '
-jaxon.command.handler.register("graph", function(args) {
-    var options = {
-        series: {
-            lines: {show: true},
-            points: {show: true}
-        },
-        xaxis: {
-            ticks: args.data.labels,
-            rotateTicks: args.data.xrotate
-        },
-        yaxis: {
-            min:0
-        },
-        grid:{
-            hoverable: true
-        },
-        tooltip: true,
-        tooltipOpts: {
-            content:"%ct"
-        }
-    };
-    $.plot($("#" + args.data.container), args.data.points, options);
-});
-';
-    }*/
+        return '';
+    }
 
     public function showGraph($container, $graphData)
     {
