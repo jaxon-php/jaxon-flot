@@ -4,6 +4,8 @@ namespace Jaxon\Flot;
 
 class Plugin extends \Jaxon\Plugin\Response
 {
+    use \Jaxon\Utils\ContainerTrait;
+
     public function getName()
     {
         return 'flot';
@@ -12,7 +14,7 @@ class Plugin extends \Jaxon\Plugin\Response
     public function generateHash()
     {
         // The version number is used as hash
-        return '1.0.0';
+        return '0.1.2';
     }
 
     public function getJs()
