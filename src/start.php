@@ -1,4 +1,4 @@
 <?php
 
 // Register an instance of this plugin
-registerJaxonPlugin(new \Jaxon\Flot\Plugin());
+jaxon_register_plugin(new \Jaxon\Flot\Plugin());
