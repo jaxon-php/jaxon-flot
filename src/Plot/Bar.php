@@ -2,7 +2,7 @@
 
 namespace Jaxon\Flot\Plot;
 
-class Bar extends Series
+class Bar extends Graph
 {
     /**
      * 

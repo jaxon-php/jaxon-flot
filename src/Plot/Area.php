@@ -2,7 +2,7 @@
 
 namespace Jaxon\Flot\Plot;
 
-class Area extends Series
+class Area extends Graph
 {
     /**
      * 
