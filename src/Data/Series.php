@@ -16,33 +16,64 @@ use JsonSerializable;
 
 class Series implements JsonSerializable
 {
-    public $aPoints = [];
+    protected $aPoints;
+    protected $aValues;
+    protected $aLabels;
 
-    public function addPoint($iXaxis, $xValue, $sLabel = '')
+    public function __construct()
     {
-        $xPoint = new Point($iXaxis, $xValue, $sLabel);
-        $this->aPoints[] = $xPoint;
-        return $xPoint;
+        $this->aPoints = [];
+        $this->aValues = ['data' => null, 'func' => null];
+        $this->aLabels = ['data' => null, 'func' => null];
     }
 
-    /**
-     * Returns a string representation of the script output (javascript) from this object
-     *
-     * @return string
-     */
-    protected function toString()
+    public function point($iXaxis, $xValue, $sLabel = '')
     {
-        return '[' . implode(', ', $this->aPoints) . ']';
+        $this->aPoints[] = $iXaxis;
+        if(!$this->aValues['data'])
+        {
+            $this->aValues['data'] = [];
+        }
+        $this->aValues['data'][$iXaxis] = $xValue;
+        if(($sLabel))
+        {
+            if(!$this->aLabels['data'])
+            {
+                $this->aLabels['data'] = [];
+            }
+            $this->aLabels['data'][$iXaxis] = $sLabel;
+        }
+        return $this;
     }
 
-    /**
-     * Convert this object to string
-     *
-     * @return string
-     */
-    public function __toString()
+    public function points($aPoints)
     {
-        return $this->toString();
+        foreach($aPoints as $aPoint)
+        {
+            if(count($aPoint) == 2)
+            {
+                $this->point($aPoint[0], $aPoint[1]);
+            }
+            else if(count($aPoint) == 3)
+            {
+                $this->point($aPoint[0], $aPoint[1], $aPoint[2]);
+            }
+        }
+        return count($this->aPoints);
+    }
+
+    public function expr($iStart, $iEnd, $iStep, $sJsValue, $sJsLabel = '')
+    {
+        for($x = $iStart; $x < $iEnd; $x += $iStep)
+        {
+            $this->aPoints[] = $x;
+        }
+        $this->aValues['func'] = 'return ' . $sJsValue . ';';
+        if(($sJsLabel))
+        {
+            $this->aLabels['func'] = 'return ' . $sJsLabel . ';';
+        }
+        return count($this->aPoints);
     }
 
     /**
@@ -54,6 +85,12 @@ class Series implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->toString();
+        // Surround the js var with a special marker that will later be removed
+        // return '' . $this->sJsVar . '';
+        $json = new \stdClass;
+        $json->points = $this->aPoints;
+        $json->values = $this->aValues;
+        $json->labels = $this->aLabels;
+        return $json;
     }
 }

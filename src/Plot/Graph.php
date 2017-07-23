@@ -26,34 +26,13 @@ class Graph implements JsonSerializable
      */
     public function series()
     {
-        return $xSeries;
+        return $this->xSeries;
     }
 
     public function setOptions(array $aOptions)
     {
         $this->aOptions = array_merge($this->aOptions, $aOptions);
         return $this;
-    }
-
-    /**
-     * Returns a string representation of the script output (javascript) from this object
-     *
-     * @return string
-     */
-    protected function toString()
-    {
-        $this->aOptions['data'] = $this->xSeries;
-        return json_encode($this->aOptions, JSON_FORCE_OBJECT);
-    }
-
-    /**
-     * Convert this object to string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
     }
 
     /**
@@ -65,6 +44,8 @@ class Graph implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->toString();
+        $json = $this->xSeries->jsonSerialize();
+        $json->options = $this->aOptions;
+        return $json;
     }
 }

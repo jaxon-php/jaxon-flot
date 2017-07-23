@@ -13,12 +13,15 @@
 namespace Jaxon\Flot\Plot;
 
 use JsonSerializable;
+use Jaxon\Flot\Data\Ticks;
 
 class Plot implements JsonSerializable
 {
     public $sSelector;
     public $aGraphs = [];
     public $aOptions;
+    protected $xTicksX;
+    protected $xTicksY;
 
     /**
      * The constructor.
@@ -28,47 +31,26 @@ class Plot implements JsonSerializable
      */
     public function __construct($sSelector, $sContext = '')
     {
-        $sSelector = trim($sSelector, " \t");
-        $sContext = trim($sContext, " \t");
-        if(($sContext))
-        {
-            $this->sSelector = "'" . $sSelector . "', $('" . $sContext . "')";
-        }
-        else
-        {
-            $this->sSelector = "'" . $sSelector . "'";
-        }
+        $this->sSelector = trim($sSelector, " \t");
+        $this->xTicksX = new Ticks();
+        $this->xTicksY = new Ticks();
     }
 
-    public function addGraph(array $aOptions = [])
+    public function graph(array $aOptions = [])
     {
         $xGraph = new Graph($aOptions);
         $this->aGraphs[] = $xGraph;
         return $xGraph;
     }
 
-    /**
-     * Generate the javascript call to draw this plot.
-     *
-     * @return string
-     */
-    public function getScript()
+    public function xticks()
     {
-        if(count($this->aGraphs) == 0)
-        {
-            return '';
-        }
-        return '$.plot(' . $this->sSelector . ',[{' . implode('},{', $this->aGraphs) . '}])';
+        return $this->xTicksX;
     }
 
-    /**
-     * Magic function to generate the jQuery call.
-     *
-     * @return string
-     */
-    public function __toString()
+    public function yticks()
     {
-        return $this->getScript();
+        return $this->xTicksY;
     }
 
     /**
@@ -80,6 +62,11 @@ class Plot implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->getScript();
+        return [
+            'selector' => $this->sSelector,
+            'graphs' => $this->aGraphs,
+            'xticks' => $this->xTicksX,
+            'yticks' => $this->xTicksY,
+        ];
     }
 }
