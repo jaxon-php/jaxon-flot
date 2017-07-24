@@ -27,13 +27,16 @@ class Plot implements JsonSerializable
      * The constructor.
      *
      * @param string        $sSelector            The jQuery selector
-     * @param string        $sContext             A context associated to the selector
      */
-    public function __construct($sSelector, $sContext = '')
+    public function __construct()
     {
-        $this->sSelector = trim($sSelector, " \t");
         $this->xTicksX = new Ticks();
         $this->xTicksY = new Ticks();
+    }
+
+    public function selector($sSelector)
+    {
+        $this->sSelector = trim($sSelector, " \t");
     }
 
     public function graph(array $aOptions = [])

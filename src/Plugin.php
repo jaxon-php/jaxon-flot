@@ -152,19 +152,25 @@ jaxon.command.handler.register("flot.plot", function(args) {
     }
 
     /**
-     * Create a Plot instance with a given selector, and link it to the current response.
-     *
-     * Since this element is linked to a response, its code will be automatically sent to the client.
-     *
-     * @param string        $sSelector            The jQuery selector
-     * @param string        $sContext             A context associated to the selector
+     * Create a Plot instance.
      *
      * @return Jaxon\Flot\Plot\Plot
      */
-    public function plot($sSelector = '', $sContext = '')
+    public function plot()
     {
-        $xPlot = new Plot\Plot($sSelector, $sContext);
+        return new Plot\Plot();
+    }
+
+    /**
+     * Draw a Plot into a given HTML element.
+     *
+     * @param string        $sSelector            The jQuery selector
+     *
+     * @return void
+     */
+    public function draw($sSelector, Plot\Plot $xPlot)
+    {
+        $xPlot->selector($sSelector);
         $this->addCommand(array('cmd' => 'flot.plot'), $xPlot);
-        return $xPlot;
     }
 }

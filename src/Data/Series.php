@@ -86,7 +86,7 @@ class Series implements JsonSerializable
     public function jsonSerialize()
     {
         // Surround the js var with a special marker that will later be removed
-        // return '' . $this->sJsVar . '';
+        // Note: does not work when returning an array
         $json = new \stdClass;
         $json->points = $this->aPoints;
         $json->values = $this->aValues;
