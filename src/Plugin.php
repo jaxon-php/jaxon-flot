@@ -102,7 +102,6 @@ jaxon.command.handler.register("flot.plot", function(args) {
         }
         if(ticks.length > 0)
         {
-            alert("Setting ticks!!");
             options.xaxis = {ticks: ticks};
         }
     }
