@@ -17,26 +17,38 @@ use Jaxon\Flot\Data\Ticks;
 
 class Plot implements JsonSerializable
 {
-    public $sSelector;
-    public $aGraphs = [];
-    public $aOptions;
-    protected $xTicksX;
-    protected $xTicksY;
+    protected $sSelector;
+    protected $aGraphs = [];
+    protected $aOptions;
+    protected $sWidth;
+    protected $sHeight;
+    protected $xAxisX;
+    protected $xAxisY;
 
     /**
      * The constructor.
      *
      * @param string        $sSelector            The jQuery selector
      */
-    public function __construct()
-    {
-        $this->xTicksX = new Ticks();
-        $this->xTicksY = new Ticks();
-    }
-
-    public function selector($sSelector)
+    public function __construct($sSelector)
     {
         $this->sSelector = trim($sSelector, " \t");
+        $this->xAxisX = new Ticks();
+        $this->xAxisY = new Ticks();
+        $this->sWidth = '';
+        $this->sHeight = '';
+    }
+
+    public function width($sWidth)
+    {
+        $this->sWidth = trim($sWidth, " \t");
+        return $this;
+    }
+
+    public function height($sHeight)
+    {
+        $this->sHeight = trim($sHeight, " \t");
+        return $this;
     }
 
     public function graph(array $aOptions = [])
@@ -46,14 +58,14 @@ class Plot implements JsonSerializable
         return $xGraph;
     }
 
-    public function xticks()
+    public function xaxis()
     {
-        return $this->xTicksX;
+        return $this->xAxisX;
     }
 
-    public function yticks()
+    public function yaxis()
     {
-        return $this->xTicksY;
+        return $this->xAxisY;
     }
 
     /**
@@ -68,8 +80,9 @@ class Plot implements JsonSerializable
         return [
             'selector' => $this->sSelector,
             'graphs' => $this->aGraphs,
-            'xticks' => $this->xTicksX,
-            'yticks' => $this->xTicksY,
+            'xaxis' => $this->xAxisX,
+            'yaxis' => $this->xAxisY,
+            'size' => ['width' => $this->sWidth, 'height' => $this->sHeight],
         ];
     }
 }

@@ -46,6 +46,15 @@ jaxon.command.handler.register("flot.plot", function(args) {
     var graphs = [];
     var showLabels = false;
     args.data.labels = {};
+    // Set container size
+    if(args.data.size.width != "")
+    {
+        $(args.data.selector).css({width: args.data.size.width});
+    }
+    if(args.data.size.height != "")
+    {
+        $(args.data.selector).css({height: args.data.size.height});
+    }
     for(var i = 0, ilen = args.data.graphs.length; i < ilen; i++)
     {
         var g = args.data.graphs[i];
@@ -80,24 +89,24 @@ jaxon.command.handler.register("flot.plot", function(args) {
         graphs.push(graph);
     }
     // Setting ticks
-    if(args.data.xticks.points.length > 0)
+    if(args.data.xaxis.points.length > 0)
     {
         var ticks = [];
-        if(args.data.xticks.labels.data != null)
+        if(args.data.xaxis.labels.data != null)
         {
-            for(var i = 0; i < args.data.xticks.points.length; i++)
+            for(var i = 0; i < args.data.xaxis.points.length; i++)
             {
-                var point = args.data.xticks.points[i];
-                ticks.push([point, args.data.xticks.labels.data[point]]);
+                var point = args.data.xaxis.points[i];
+                ticks.push([point, args.data.xaxis.labels.data[point]]);
             }
         }
-        else if(args.data.xticks.labels.func != null)
+        else if(args.data.xaxis.labels.func != null)
         {
-            args.data.xticks.labels.func = new Function("x", args.data.xticks.labels.func);
-            for(var i = 0; i < args.data.xticks.points.length; i++)
+            args.data.xaxis.labels.func = new Function("x", args.data.xaxis.labels.func);
+            for(var i = 0; i < args.data.xaxis.points.length; i++)
             {
-                var point = args.data.xticks.points[i];
-                ticks.push([point, args.data.xticks.labels.func(point)]);
+                var point = args.data.xaxis.points[i];
+                ticks.push([point, args.data.xaxis.labels.func(point)]);
             }
         }
         if(ticks.length > 0)
@@ -105,9 +114,8 @@ jaxon.command.handler.register("flot.plot", function(args) {
             options.xaxis = {ticks: ticks};
         }
     }
-    /*if(args.data.yticks.points.length > 0)
+    /*if(args.data.yaxis.points.length > 0)
     {
-        options.yaxis.ticks = args.data.ticks.yaxis;
     }*/
     if(showLabels)
     {
@@ -154,23 +162,22 @@ jaxon.command.handler.register("flot.plot", function(args) {
     /**
      * Create a Plot instance.
      *
+     * @param string        $sSelector            The jQuery selector
+     *
      * @return Jaxon\Flot\Plot\Plot
      */
-    public function plot()
+    public function plot($sSelector)
     {
-        return new Plot\Plot();
+        return new Plot\Plot($sSelector);
     }
 
     /**
      * Draw a Plot into a given HTML element.
      *
-     * @param string        $sSelector            The jQuery selector
-     *
      * @return void
      */
-    public function draw($sSelector, Plot\Plot $xPlot)
+    public function draw(Plot\Plot $xPlot)
     {
-        $xPlot->selector($sSelector);
         $this->addCommand(array('cmd' => 'flot.plot'), $xPlot);
     }
 }
