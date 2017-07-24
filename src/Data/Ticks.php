@@ -19,7 +19,7 @@ class Ticks implements JsonSerializable
     protected $aPoints;
     protected $aLabels;
 
-    public function __construct($aPoints)
+    public function __construct()
     {
         $this->aPoints = [];
         $this->aLabels = ['data' => null, 'func' => null];
