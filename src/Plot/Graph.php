@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Graph.php - A graph to be printed in a plot.
+ *
+ * @package jaxon-flot
+ * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
+ * @copyright 2017 Thierry Feuzeu <thierry.feuzeu@gmail.com>
+ * @license https://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
+ * @link https://github.com/jaxon-php/jaxon-flot
+ */
+
 namespace Jaxon\Flot\Plot;
 
 use JsonSerializable;
@@ -7,11 +17,25 @@ use Jaxon\Flot\Data\Series;
 
 class Graph implements JsonSerializable
 {
+
+    /**
+     * The graph series
+     *
+     * @var Jaxon\Flot\Data\Series
+     */
     public $xSeries;
+
+    /**
+     * The graph options
+     *
+     * @var array
+     */
     public $aOptions = [];
 
     /**
-     * The constructor
+     * The constructor.
+     *
+     * @param string        $aOptions            The graph options, as defined by the Flot library
      */
     public function __construct(array $aOptions = [])
     {
@@ -22,13 +46,20 @@ class Graph implements JsonSerializable
     /**
      * Get this plot dataset
      * 
-     * @return \Jaxon\Flot\Series\Series
+     * @return Jaxon\Flot\Data\Series
      */
     public function series()
     {
         return $this->xSeries;
     }
 
+    /**
+     * Set the graph options.
+     *
+     * @param array         $aOptions               The graph options
+     *
+     * @return Jaxon\Flot\Plot\Graph
+     */
     public function setOptions(array $aOptions)
     {
         $this->aOptions = array_merge($this->aOptions, $aOptions);
@@ -36,11 +67,11 @@ class Graph implements JsonSerializable
     }
 
     /**
-     * Convert this object to string, when converting the response into json.
+     * Convert this object to another object more suitable for json format.
      *
      * This is a method of the JsonSerializable interface.
      *
-     * @return string
+     * @return stdClass
      */
     public function jsonSerialize()
     {

@@ -1,20 +1,45 @@
 <?php
 
+/**
+ * Plugin.php - Javascript charts for Jaxon with the Flot library.
+ *
+ * @package jaxon-flot
+ * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
+ * @copyright 2017 Thierry Feuzeu <thierry.feuzeu@gmail.com>
+ * @license https://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
+ * @link https://github.com/jaxon-php/jaxon-flot
+ */
+
 namespace Jaxon\Flot;
 
 class Plugin extends \Jaxon\Plugin\Response
 {
+    /**
+     * Get the plugin name.
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'flot';
     }
 
+    /**
+     * Get the plugin hash.
+     *
+     * @return string
+     */
     public function generateHash()
     {
         // The version number is used as hash
         return '1.0.0';
     }
 
+    /**
+     * Get the javascript includes.
+     *
+     * @return string
+     */
     public function getJs()
     {
         if(!$this->includeAssets())
@@ -28,6 +53,11 @@ class Plugin extends \Jaxon\Plugin\Response
 <script type="text/javascript" src="https://cdn.jaxon-php.org/libs/flot/0.8.3/jquery.flot.tickrotor.js"></script>';
     }
 
+    /**
+     * Get the javascript code.
+     *
+     * @return string
+     */
     public function getScript()
     {
         return '
@@ -172,7 +202,7 @@ jaxon.command.handler.register("flot.plot", function(args) {
     }
 
     /**
-     * Draw a Plot into a given HTML element.
+     * Draw a Plot in a given HTML element.
      *
      * @return void
      */

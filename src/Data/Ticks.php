@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Ticks.php - Contains data to be printed in a graph. 
+ * Ticks.php - Contains data to be printed on the plot axis. 
  *
  * @package jaxon-flot
  * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
@@ -13,18 +13,42 @@
 namespace Jaxon\Flot\Data;
 
 use JsonSerializable;
+use stdClass;
 
 class Ticks implements JsonSerializable
 {
+
+    /**
+     * The points
+     *
+     * @var array
+     */
     protected $aPoints;
+
+    /**
+     * The points labels
+     *
+     * @var array
+     */
     protected $aLabels;
 
+    /**
+     * The constructor.
+     */
     public function __construct()
     {
         $this->aPoints = [];
         $this->aLabels = ['data' => null, 'func' => null];
     }
 
+    /**
+     * Add a point to the ticks.
+     *
+     * @param integer       $iXaxis                 The point on the X axis
+     * @param string        $sLabel                 The value on the graph
+     *
+     * @return Jaxon\Flot\Data\Ticks
+     */
     public function point($iXaxis, $sLabel)
     {
         $this->aPoints[] = $iXaxis;
@@ -36,6 +60,13 @@ class Ticks implements JsonSerializable
         return $this;
     }
 
+    /**
+     * Add an array of points to the ticks.
+     *
+     * @param array         $aPoints                The points to be added
+     *
+     * @return integer      The number of points in the ticks
+     */
     public function points($aPoints)
     {
         foreach($aPoints as $aPoint)
@@ -48,6 +79,19 @@ class Ticks implements JsonSerializable
         return count($this->aPoints);
     }
 
+    /**
+     * Add points to the ticks using an expression.
+     *
+     * @param numeric       $iStart                 The first point
+     * @param numeric       $iEnd                   The last point
+     * @param numeric       $iStep                  The step between next points
+     * @param string        $sJsLabel               The javascript code to make points labels
+     * 
+     * The first three parameters are used in a for loop.
+     * The x variable is used in the javascript code to represent each point.
+     *
+     * @return integer      The number of points in the ticks
+     */
     public function expr($iStart, $iEnd, $iStep, $sJsLabel)
     {
         for($x = $iStart; $x < $iEnd; $x += $iStep)
@@ -59,17 +103,17 @@ class Ticks implements JsonSerializable
     }
 
     /**
-     * Convert this object to string, when converting the response into json.
+     * Convert this object to another object more suitable for json format.
      *
      * This is a method of the JsonSerializable interface.
      *
-     * @return string
+     * @return stdClass
      */
     public function jsonSerialize()
     {
         // Surround the js var with a special marker that will later be removed
         // Note: does not work when returning an array
-        $json = new \stdClass;
+        $json = new stdClass;
         $json->points = $this->aPoints;
         $json->labels = $this->aLabels;
         return $json;

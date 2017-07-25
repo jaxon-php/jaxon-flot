@@ -13,13 +13,34 @@
 namespace Jaxon\Flot\Data;
 
 use JsonSerializable;
+use stdClass;
 
 class Series implements JsonSerializable
 {
+    /**
+     * The points
+     *
+     * @var array
+     */
     protected $aPoints;
+
+    /**
+     * The points values
+     *
+     * @var array
+     */
     protected $aValues;
+
+    /**
+     * The points labels
+     *
+     * @var array
+     */
     protected $aLabels;
 
+    /**
+     * The constructor.
+     */
     public function __construct()
     {
         $this->aPoints = [];
@@ -27,6 +48,14 @@ class Series implements JsonSerializable
         $this->aLabels = ['data' => null, 'func' => null];
     }
 
+    /**
+     * Add a point to the series.
+     *
+     * @param integer       $iXaxis                 The point on the X axis
+     * @param string        $sLabel                 The value on the graph
+     *
+     * @return Jaxon\Flot\Data\Ticks
+     */
     public function point($iXaxis, $xValue, $sLabel = '')
     {
         $this->aPoints[] = $iXaxis;
@@ -46,6 +75,13 @@ class Series implements JsonSerializable
         return $this;
     }
 
+    /**
+     * Add an array of points to the series.
+     *
+     * @param array         $aPoints                The points to be added
+     *
+     * @return integer      The number of points in the graph series
+     */
     public function points($aPoints)
     {
         foreach($aPoints as $aPoint)
@@ -62,6 +98,22 @@ class Series implements JsonSerializable
         return count($this->aPoints);
     }
 
+    /**
+     * Add points to the graph series using an expression.
+     *
+     * @param numeric       $iStart                 The first point
+     * @param numeric       $iEnd                   The last point
+     * @param numeric       $iStep                  The step between next points
+     * @param string        $sJsValue               The javascript code to compute points values
+     * @param string        $sJsLabel               The javascript code to make points labels
+     * 
+     * The first three parameters are used in a for loop.
+     * The x variable is used in the $sJsValue javascript code to represent each point.
+     * The series, x and y variables are used in the $sJsLabel javascript code to represent
+     * resp. the series label, the xaxis and graph values of the point.
+     *
+     * @return integer      The number of points in the graph series
+     */
     public function expr($iStart, $iEnd, $iStep, $sJsValue, $sJsLabel = '')
     {
         for($x = $iStart; $x < $iEnd; $x += $iStep)
@@ -77,17 +129,17 @@ class Series implements JsonSerializable
     }
 
     /**
-     * Convert this object to string, when converting the response into json.
+     * Convert this object to another object more suitable for json format.
      *
      * This is a method of the JsonSerializable interface.
      *
-     * @return string
+     * @return stdClass
      */
     public function jsonSerialize()
     {
         // Surround the js var with a special marker that will later be removed
         // Note: does not work when returning an array
-        $json = new \stdClass;
+        $json = new stdClass;
         $json->points = $this->aPoints;
         $json->values = $this->aValues;
         $json->labels = $this->aLabels;

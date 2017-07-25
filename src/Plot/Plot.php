@@ -17,12 +17,54 @@ use Jaxon\Flot\Data\Ticks;
 
 class Plot implements JsonSerializable
 {
+
+    /**
+     * The HTML element selector
+     *
+     * @var string
+     */
     protected $sSelector;
+
+    /**
+     * The graphs
+     *
+     * @var array
+     */
     protected $aGraphs = [];
+
+    /**
+     * The plot options
+     *
+     * @var array
+     */
     protected $aOptions;
+
+    /**
+     * The plot width
+     *
+     * @var string
+     */
     protected $sWidth;
+
+    /**
+     * The plot height
+     *
+     * @var string
+     */
     protected $sHeight;
+
+    /**
+     * The plot X axis
+     *
+     * @var Jaxon\Flot\Data\Ticks
+     */
     protected $xAxisX;
+
+    /**
+     * The plot Y axis
+     *
+     * @var Jaxon\Flot\Data\Ticks
+     */
     protected $xAxisY;
 
     /**
@@ -39,18 +81,39 @@ class Plot implements JsonSerializable
         $this->sHeight = '';
     }
 
+    /**
+     * Set the container width.
+     *
+     * @param string        $sWidth                 The container width
+     *
+     * @return Jaxon\Flot\Plot\Plot
+     */
     public function width($sWidth)
     {
         $this->sWidth = trim($sWidth, " \t");
         return $this;
     }
 
+    /**
+     * Set the container height.
+     *
+     * @param string        $sHeight                The container height
+     *
+     * @return Jaxon\Flot\Plot\Plot
+     */
     public function height($sHeight)
     {
         $this->sHeight = trim($sHeight, " \t");
         return $this;
     }
 
+    /**
+     * Add a new graph to the plot.
+     *
+     * @param array         $aOptions               The graph options
+     *
+     * @return Jaxon\Flot\Plot\Graph
+     */
     public function graph(array $aOptions = [])
     {
         $xGraph = new Graph($aOptions);
@@ -58,22 +121,32 @@ class Plot implements JsonSerializable
         return $xGraph;
     }
 
+    /**
+     * Get the graph X axis.
+     *
+     * @return Jaxon\Flot\Data\Ticks
+     */
     public function xaxis()
     {
         return $this->xAxisX;
     }
 
+    /**
+     * Get the graph Y axis.
+     *
+     * @return Jaxon\Flot\Data\Ticks
+     */
     public function yaxis()
     {
         return $this->xAxisY;
     }
 
     /**
-     * Generate the jQuery call, when converting the response into json.
+     * Convert this object to an array for json format.
      *
      * This is a method of the JsonSerializable interface.
      *
-     * @return string
+     * @return array
      */
     public function jsonSerialize()
     {

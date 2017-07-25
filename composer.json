@@ -1,9 +1,11 @@
 {
     "name": "jaxon-php/jaxon-flot",
     "type": "library",
-    "description": "Javascript charts for Jaxon with Flot",
+    "description": "Javascript charts for Jaxon with the Flot library",
     "authors": [
-        {"name": "Thierry Feuzeu"}
+        {
+            "name": "Thierry Feuzeu"
+        }
     ],
     "homepage": "https://github.com/jaxon-php/jaxon-flot",
     "license": "BSD-2-Clause",
