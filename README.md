@@ -70,8 +70,8 @@ You can add as many graphs as you need in a single plot, and you can draw many p
 Contribute
 ----------
 
-- Issue Tracker: github.com/jaxon-php/jaxon-armada/issues
-- Source Code: github.com/jaxon-php/jaxon-armada
+- Issue Tracker: github.com/jaxon-php/jaxon-flot/issues
+- Source Code: github.com/jaxon-php/jaxon-flot
 
 License
 -------
