@@ -28,7 +28,7 @@ class Plugin extends \Jaxon\Plugin\Response
     public function getHash()
     {
         // The version number is used as hash
-        return '1.0.0';
+        return '3.1.0';
     }
 
     /**
