@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Ticks.php - Contains data to be printed on the plot axis. 
+ * Ticks.php - Contains data to be printed on the plot axis.
  *
  * @package jaxon-flot
  * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
@@ -14,6 +14,8 @@ namespace Jaxon\Flot\Data;
 
 use JsonSerializable;
 use stdClass;
+
+use function count;
 
 class Ticks implements JsonSerializable
 {
@@ -86,7 +88,7 @@ class Ticks implements JsonSerializable
      * @param numeric       $iEnd                   The last point
      * @param numeric       $iStep                  The step between next points
      * @param string        $sJsLabel               The javascript code to make points labels
-     * 
+     *
      * The first three parameters are used in a for loop.
      * The x variable is used in the javascript code to represent each point.
      *

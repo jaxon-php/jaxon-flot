@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Series.php - Contains data to be printed in a graph. 
+ * Series.php - Contains data to be printed in a graph.
  *
  * @package jaxon-flot
  * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
@@ -14,6 +14,8 @@ namespace Jaxon\Flot\Data;
 
 use JsonSerializable;
 use stdClass;
+
+use function count;
 
 class Series implements JsonSerializable
 {
@@ -106,7 +108,7 @@ class Series implements JsonSerializable
      * @param numeric       $iStep                  The step between next points
      * @param string        $sJsValue               The javascript code to compute points values
      * @param string        $sJsLabel               The javascript code to make points labels
-     * 
+     *
      * The first three parameters are used in a for loop.
      * The x variable is used in the $sJsValue javascript code to represent each point.
      * The series, x and y variables are used in the $sJsLabel javascript code to represent

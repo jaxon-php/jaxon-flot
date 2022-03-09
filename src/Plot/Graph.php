@@ -15,13 +15,15 @@ namespace Jaxon\Flot\Plot;
 use JsonSerializable;
 use Jaxon\Flot\Data\Series;
 
+use function array_merge;
+
 class Graph implements JsonSerializable
 {
 
     /**
      * The graph series
      *
-     * @var Jaxon\Flot\Data\Series
+     * @var Series
      */
     public $xSeries;
 
@@ -45,8 +47,8 @@ class Graph implements JsonSerializable
 
     /**
      * Get this plot dataset
-     * 
-     * @return Jaxon\Flot\Data\Series
+     *
+     * @return Series
      */
     public function series()
     {
@@ -58,7 +60,7 @@ class Graph implements JsonSerializable
      *
      * @param array         $aOptions               The graph options
      *
-     * @return Jaxon\Flot\Plot\Graph
+     * @return Graph
      */
     public function setOptions(array $aOptions)
     {

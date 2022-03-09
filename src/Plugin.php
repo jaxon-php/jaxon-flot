@@ -12,12 +12,33 @@
 
 namespace Jaxon\Flot;
 
-class Plugin extends \Jaxon\Plugin\Response
+use Jaxon\Plugin\Response;
+use Jaxon\Utils\Template\Engine as TemplateEngine;
+use Jaxon\Flot\Plot\Plot;
+
+use function realpath;
+
+class Plugin extends Response
 {
+    /**
+     * @var TemplateEngine
+     */
+    protected $xTemplateEngine;
+
+    /**
+     * The constructor
+     *
+     * @param TemplateEngine $xTemplateEngine
+     */
+    public function __construct(TemplateEngine $xTemplateEngine)
+    {
+        $this->xTemplateEngine = $xTemplateEngine;
+    }
+
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return 'flot';
     }
@@ -25,7 +46,7 @@ class Plugin extends \Jaxon\Plugin\Response
     /**
      * @inheritDoc
      */
-    public function getHash()
+    public function getHash(): string
     {
         // The version number is used as hash
         return '3.1.0';
@@ -34,21 +55,17 @@ class Plugin extends \Jaxon\Plugin\Response
     /**
      * @inheritDoc
      */
-    public function getJs()
+    public function getJs(): string
     {
-        if(!$this->includeAssets())
-        {
-            return '';
-        }
-        return jaxon()->template()->render('jaxon::flot::js.html');
+        return $this->xTemplateEngine->render('jaxon::flot::js.html');
     }
 
     /**
      * @inheritDoc
      */
-    public function getReadyScript()
+    public function getReadyScript(): string
     {
-        return jaxon()->template()->render('jaxon::flot::ready.js');
+        return $this->xTemplateEngine->render('jaxon::flot::ready.js');
     }
 
     /**
@@ -56,11 +73,11 @@ class Plugin extends \Jaxon\Plugin\Response
      *
      * @param string        $sSelector            The jQuery selector
      *
-     * @return Plot\Plot
+     * @return Plot
      */
-    public function plot($sSelector)
+    public function plot($sSelector): Plot
     {
-        return new Plot\Plot($sSelector);
+        return new Plot($sSelector);
     }
 
     /**
@@ -68,8 +85,8 @@ class Plugin extends \Jaxon\Plugin\Response
      *
      * @return void
      */
-    public function draw(Plot\Plot $xPlot)
+    public function draw(Plot $xPlot)
     {
-        $this->addCommand(array('cmd' => 'flot.plot'), $xPlot);
+        $this->addCommand(['cmd' => 'flot.plot'], $xPlot);
     }
 }

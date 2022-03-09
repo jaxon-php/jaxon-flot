@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plot.php - A plot containing one or more graphs. 
+ * Plot.php - A plot containing one or more graphs.
  *
  * @package jaxon-flot
  * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
@@ -14,6 +14,8 @@ namespace Jaxon\Flot\Plot;
 
 use JsonSerializable;
 use Jaxon\Flot\Data\Ticks;
+
+use function trim;
 
 class Plot implements JsonSerializable
 {
