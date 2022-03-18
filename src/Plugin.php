@@ -12,13 +12,13 @@
 
 namespace Jaxon\Flot;
 
-use Jaxon\Plugin\Response;
+use Jaxon\Plugin\ResponsePlugin;
 use Jaxon\Utils\Template\Engine as TemplateEngine;
 use Jaxon\Flot\Plot\Plot;
 
 use function realpath;
 
-class Plugin extends Response
+class Plugin extends ResponsePlugin
 {
     /**
      * @var TemplateEngine
