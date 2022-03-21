@@ -1,10 +1,13 @@
 <?php
 
+use Jaxon\Flot\Plugin;
+use Jaxon\Utils\Template\Engine as TemplateEngine;
+
 // Register the template dir into the template renderer
-jaxon()->di()->set(Jaxon\Flot\Plugin::class, function($c) {
-    $xTemplateEngine = $c->g(Jaxon\Utils\Template\Engine::class);
+jaxon()->di()->set(Plugin::class, function($c) {
+    $xTemplateEngine = $c->g(TemplateEngine::class);
     $xTemplateEngine->addNamespace('jaxon::flot', realpath(__DIR__ . '/../templates'));
-    return new Jaxon\Flot\Plugin($xTemplateEngine);
+    return new Plugin($xTemplateEngine);
 });
 // Register an instance of this plugin
-jaxon()->registerPlugin(Jaxon\Flot\Plugin::class, 'flot');
+jaxon()->registerPlugin(Plugin::class, Plugin::NAME);

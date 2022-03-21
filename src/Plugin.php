@@ -21,6 +21,11 @@ use function realpath;
 class Plugin extends ResponsePlugin
 {
     /**
+     * @const The plugin name
+     */
+    const NAME = 'flot';
+
+    /**
      * @var TemplateEngine
      */
     protected $xTemplateEngine;
@@ -40,7 +45,7 @@ class Plugin extends ResponsePlugin
      */
     public function getName(): string
     {
-        return 'flot';
+        return self::NAME;
     }
 
     /**
