@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin.php - Javascript charts for Jaxon with the Flot library.
+ * FlotPlugin.php - Javascript charts for Jaxon with the Flot library.
  *
  * @package jaxon-flot
  * @author Thierry Feuzeu <thierry.feuzeu@gmail.com>
@@ -13,12 +13,12 @@
 namespace Jaxon\Flot;
 
 use Jaxon\Plugin\ResponsePlugin;
-use Jaxon\Utils\Template\Engine as TemplateEngine;
+use Jaxon\Utils\Template\TemplateEngine;
 use Jaxon\Flot\Plot\Plot;
 
 use function realpath;
 
-class Plugin extends ResponsePlugin
+class FlotPlugin extends ResponsePlugin
 {
     /**
      * @const The plugin name
