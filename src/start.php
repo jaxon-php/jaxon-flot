@@ -1,5 +1,7 @@
 <?php
 
+namespace Jaxon;
+
 use Jaxon\Flot\FlotPlugin;
 use Jaxon\Utils\Template\TemplateEngine;
 
