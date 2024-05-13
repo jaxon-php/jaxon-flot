@@ -11,91 +11,76 @@
         opacity: 0.80
     }).appendTo("body");
 
-    jaxon.command.handler.register("flot.plot", function(args) {
-        const options = args.data.options || {};
-        const graphs = [];
+    jaxon.register("flot.plot", function({ plot: { selector, graphs, size, xaxis, yaxis, options = {} } }) {
         let showLabels = false;
-        args.data.labels = {};
+        const labels = {};
         // Set container size
-        if(args.data.size.width !== "")
+        if(size.width !== "")
         {
-            $(args.data.selector).css({width: args.data.size.width});
+            $(selector).css({width: size.width});
         }
-        if(args.data.size.height !== "")
+        if(size.height !== "")
         {
-            $(args.data.selector).css({height: args.data.size.height});
+            $(selector).css({height: size.height});
         }
-        for(let i = 0, ilen = args.data.graphs.length; i < ilen; i++)
-        {
-            const g = args.data.graphs[i];
+
+        const _graphs = graphs.map(g => {
             const graph = g.options || {};
             graph.data = [];
-            if(g.values.data != null)
+            if(g.values.data !== null)
             {
-                for(let j = 0, jlen = g.points.length; j < jlen; j++)
-                {
-                    const x = g.points[j];
-                    graph.data.push([x, g.values.data[x]]);
-                }
+                graph.data = g.points.map(x => [x, g.values.data[x]]);
             }
-            else if(g.values.func != null)
+            else if(g.values.func !== null)
             {
                 g.values.func = new Function("x", g.values.func);
-                for(let j = 0, jlen = g.points.length; j < jlen; j++)
-                {
-                    const x = g.points[j];
-                    graph.data.push([x, g.values.func(x)]);
-                }
+                graph.data = g.points.map(x => [x, g.values.func(x)]);
             }
             if(g.labels.func !== null)
             {
                 g.labels.func = new Function("series,x,y", g.labels.func);
             }
-            if(typeof g.options.label !== "undefined" && (g.labels.data != null || g.labels.func != null))
+            if(typeof g.options.label !== "undefined" &&
+                (g.labels.data !== null || g.labels.func !== null))
             {
                 showLabels = true;
-                args.data.labels[g.options.label] = g.labels;
+                labels[g.options.label] = g.labels;
             }
-            graphs.push(graph);
-        }
+            return graph;
+        });
+
         // Setting ticks
-        if(args.data.xaxis.points.length > 0)
+        if(xaxis.points.length > 0)
         {
-            const ticks = [];
-            if(args.data.xaxis.labels.data != null)
+            let ticks = [];
+            if(xaxis.labels.data !== null)
             {
-                for(let i = 0; i < args.data.xaxis.points.length; i++)
-                {
-                    const point = args.data.xaxis.points[i];
-                    ticks.push([point, args.data.xaxis.labels.data[point]]);
-                }
+                ticks = xaxis.points.map(point => [point, xaxis.labels.data[point]]);
             }
-            else if(args.data.xaxis.labels.func != null)
+            else if(xaxis.labels.func !== null)
             {
-                args.data.xaxis.labels.func = new Function("x", args.data.xaxis.labels.func);
-                for(let i = 0; i < args.data.xaxis.points.length; i++)
-                {
-                    const point = args.data.xaxis.points[i];
-                    ticks.push([point, args.data.xaxis.labels.func(point)]);
-                }
+                xaxis.labels.func = new Function("x", xaxis.labels.func);
+                ticks = xaxis.points.map(point => [point, xaxis.labels.func(point)]);
             }
             if(ticks.length > 0)
             {
                 options.xaxis = {ticks: ticks};
             }
         }
-        /*if(args.data.yaxis.points.length > 0)
+        /*if(yaxis.points.length > 0)
         {
         }*/
+
         if(showLabels)
         {
             options.grid = {hoverable: true};
         }
-        $.plot(args.data.selector, graphs, options);
+        $.plot(selector, _graphs, options);
+
         // Labels
         if(showLabels)
         {
-            $(args.data.selector).bind("plothover", function (event, pos, item) {
+            $(selector).bind("plothover", function (event, pos, item) {
                 if(!item)
                 {
                     $("#flot-tooltip").hide();
@@ -105,16 +90,16 @@
                 const x = item.datapoint[0]; // item.datapoint[0].toFixed(2);
                 const y = item.datapoint[1]; // item.datapoint[1].toFixed(2);
                 let tooltip = "";
-                if(typeof args.data.labels[series] !== "undefined")
+                if(typeof labels[series] !== "undefined")
                 {
-                    const labels = args.data.labels[series];
-                    if(labels.data != null && typeof labels.data[x] !== "undefined")
+                    const _labels = labels[series];
+                    if(_labels.data != null && typeof _labels.data[x] !== "undefined")
                     {
-                        tooltip = labels.data[x];
+                        tooltip = _labels.data[x];
                     }
-                    else if(labels.func != null)
+                    else if(_labels.func != null)
                     {
-                        tooltip = labels.func(series, x, y);
+                        tooltip = _labels.func(series, x, y);
                     }
                 }
                 if((tooltip))
@@ -123,4 +108,5 @@
                 }
             });
         }
+        return true;
     });
