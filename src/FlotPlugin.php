@@ -16,8 +16,6 @@ use Jaxon\Plugin\ResponsePlugin;
 use Jaxon\Utils\Template\TemplateEngine;
 use Jaxon\Flot\Plot\Plot;
 
-use function realpath;
-
 class FlotPlugin extends ResponsePlugin
 {
     /**
@@ -92,6 +90,6 @@ class FlotPlugin extends ResponsePlugin
      */
     public function draw(Plot $xPlot)
     {
-        $this->addCommand(['cmd' => 'flot.plot'], $xPlot);
+        $this->addCommand('flot.plot', ['plot' => $xPlot]);
     }
 }
