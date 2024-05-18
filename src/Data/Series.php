@@ -88,11 +88,11 @@ class Series implements JsonSerializable
     {
         foreach($aPoints as $aPoint)
         {
-            if(count($aPoint) == 2)
+            if(count($aPoint) === 2)
             {
                 $this->point($aPoint[0], $aPoint[1]);
             }
-            else if(count($aPoint) == 3)
+            else if(count($aPoint) === 3)
             {
                 $this->point($aPoint[0], $aPoint[1], $aPoint[2]);
             }
@@ -106,13 +106,13 @@ class Series implements JsonSerializable
      * @param numeric       $iStart                 The first point
      * @param numeric       $iEnd                   The last point
      * @param numeric       $iStep                  The step between next points
-     * @param string        $sJsValue               The javascript code to compute points values
-     * @param string        $sJsLabel               The javascript code to make points labels
+     * @param string        $sJsValue               The javascript function to compute points values
+     * @param string        $sJsLabel               The javascript function to make points labels
      *
      * The first three parameters are used in a for loop.
-     * The x variable is used in the $sJsValue javascript code to represent each point.
-     * The series, x and y variables are used in the $sJsLabel javascript code to represent
-     * resp. the series label, the xaxis and graph values of the point.
+     * The x variable is used in the $sJsValue javascript function to represent each point.
+     * The series, x and y variables are used in the $sJsLabel javascript function to
+     * represent resp. the series label, the xaxis and graph values of the point.
      *
      * @return integer      The number of points in the graph series
      */
@@ -122,10 +122,10 @@ class Series implements JsonSerializable
         {
             $this->aPoints[] = $x;
         }
-        $this->aValues['func'] = 'return ' . $sJsValue . ';';
+        $this->aValues['func'] = $sJsValue;
         if(($sJsLabel))
         {
-            $this->aLabels['func'] = 'return ' . $sJsLabel . ';';
+            $this->aLabels['func'] = $sJsLabel;
         }
         return count($this->aPoints);
     }

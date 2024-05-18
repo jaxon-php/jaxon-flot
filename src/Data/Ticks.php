@@ -100,7 +100,10 @@ class Ticks implements JsonSerializable
         {
             $this->aPoints[] = $x;
         }
-        $this->aLabels['func'] = 'return ' . $sJsLabel . ';';
+        if(($sJsLabel))
+        {
+            $this->aLabels['func'] = $sJsLabel;
+        }
         return count($this->aPoints);
     }
 

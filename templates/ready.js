@@ -14,6 +14,7 @@
     jaxon.register("flot.plot", function({ plot: { selector, graphs, size, xaxis, yaxis, options = {} } }) {
         let showLabels = false;
         const labels = {};
+        const dom = jaxon.utils.dom;
         // Set container size
         if(size.width !== "")
         {
@@ -33,12 +34,12 @@
             }
             else if(g.values.func !== null)
             {
-                g.values.func = new Function("x", g.values.func);
+                g.values.func = dom.findFunction(g.values.func);
                 graph.data = g.points.map(x => [x, g.values.func(x)]);
             }
             if(g.labels.func !== null)
             {
-                g.labels.func = new Function("series,x,y", g.labels.func);
+                g.labels.func = dom.findFunction(g.labels.func);
             }
             if(typeof g.options.label !== "undefined" &&
                 (g.labels.data !== null || g.labels.func !== null))
@@ -59,7 +60,7 @@
             }
             else if(xaxis.labels.func !== null)
             {
-                xaxis.labels.func = new Function("x", xaxis.labels.func);
+                xaxis.labels.func = dom.findFunction(xaxis.labels.func);
                 ticks = xaxis.points.map(point => [point, xaxis.labels.func(point)]);
             }
             if(ticks.length > 0)
