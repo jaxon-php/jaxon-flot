@@ -2,11 +2,11 @@
 
 namespace Jaxon\Flot;
 
-use Jaxon\App\Ajax;
+use Jaxon\App\Ajax\Lib as Jaxon;
 use Jaxon\Flot\FlotPlugin;
 use Jaxon\Utils\Template\TemplateEngine;
 
-$jaxon = Ajax::getInstance();
+$jaxon = Jaxon::getInstance();
 
 // Register the template dir into the template renderer
 $jaxon->di()->set(FlotPlugin::class, function($c) {

@@ -12,11 +12,11 @@
 
 namespace Jaxon\Flot;
 
-use Jaxon\Plugin\ResponsePlugin;
+use Jaxon\Plugin\AbstractResponsePlugin;
 use Jaxon\Utils\Template\TemplateEngine;
 use Jaxon\Flot\Plot\Plot;
 
-class FlotPlugin extends ResponsePlugin
+class FlotPlugin extends AbstractResponsePlugin
 {
     /**
      * @const The plugin name
