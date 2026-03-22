@@ -2,7 +2,6 @@
 
 namespace Jaxon\Flot;
 
-use Jaxon\Flot\FlotPlugin;
 use Jaxon\Utils\Template\TemplateEngine;
 
 use function dirname;
